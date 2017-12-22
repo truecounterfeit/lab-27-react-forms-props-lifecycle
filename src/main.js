@@ -27,6 +27,37 @@ class SearchForm extends React.Component {
     this.state = {
       redditList = [],
     }
+
+    handleValue(e){
+      this.setState({
+        subReddit: even.target.value
+      });
+    }
+
+    handleThread(e){
+      this.setState({
+        redditThread: event.target.value
+      });
+    }
+
+    handleSubmit(e){
+
+    }
+
+
+
+  }
+
+  render() {
+    return (
+      <div>
+        <form>
+          <label>Reddit Search Engine</label>
+          <SearchResultList />
+          <input type: 'submit' value: 'submit'>
+        </form>
+      </div>
+    )
   }
 
 
@@ -40,6 +71,9 @@ class SearchResultList extends React.Component {
   render(){
     return (
       <div>
+        <ul>
+          <li>
+        </ul>
       </div>
     )
   }
