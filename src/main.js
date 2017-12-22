@@ -10,18 +10,39 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      redditList = [],
-    }
-  };
+  }
 
   render() {
     return (
-      <div id = "searchform"></div>
+      <div>
+      <h1>Reddit Search</h1>
+      <SeachForm />
+      </div>
     )
   };
 
+class SearchForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      redditList = [],
+    }
+  }
+
+
+}
+
+class SearchResultList extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render(){
+    return (
+      <div>
+      </div>
+    )
+  }
 }
 
 
