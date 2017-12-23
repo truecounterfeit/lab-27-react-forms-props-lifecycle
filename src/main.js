@@ -70,19 +70,11 @@ class SearchForm extends React.Component {
     return (
       <div>
         <form onSubmit = {this.handleSubmit}>
-          // <label>
-          //   <h1>Reddit Search Engine</h1>
-          // </label>
-          // </br>
-          // <label>
-          //   Name:
-          <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue}>
-          // </label>
-          // </br>
-          // <label>
-          //   Total Results:
-          <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult}>
-          // </label>
+
+          <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue} />
+
+          <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult} />
+
           <button type = 'submit' value = 'submit'>Search</button>
         </form>
         <ul>{this.renderThreadList()}</ul>
@@ -105,6 +97,8 @@ class SearchResultList extends React.Component {
           <li> <a href = {this.props.listItem.data.url}>
           <h5> {this.props.listItem.data.title} </h5>
           <p> {this.props.listItem.data.ups} </p>
+          </a>
+          </li>
         </ul>
       </div>
     )
