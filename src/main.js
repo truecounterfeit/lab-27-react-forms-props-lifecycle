@@ -15,8 +15,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-      <h1>Reddit Search</h1>
-      <SeachForm />
+        <header>
+          <h1>Reddit Search</h1>
+        </header>
+        <section>
+          <SeachForm />
+        </section>
+        <footer>
+          <h6>Lab27</h6>
+        </footer>
       </div>
     )
   };
@@ -62,15 +69,15 @@ class SearchForm extends React.Component {
     return (
       <div>
         <form onSubmit = {this.handleSubmit}>
-          <label>
-            <h1>Reddit Search Engine</h1>
-          <label>
-            </br>
+          // <label>
+          //   <h1>Reddit Search Engine</h1>
+          // </label>
+          // </br>
           <label>
             Name:
             <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue}>
           </label>
-            </br>
+          </br>
           <label>
             Total Results:
             <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult}>
