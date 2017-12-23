@@ -20,6 +20,7 @@ class App extends React.Component {
         </header>
         <section>
           <SeachForm />
+
         </section>
         <footer>
           <h6>Lab27</h6>
@@ -73,16 +74,16 @@ class SearchForm extends React.Component {
           //   <h1>Reddit Search Engine</h1>
           // </label>
           // </br>
-          <label>
-            Name:
-            <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue}>
-          </label>
-          </br>
-          <label>
-            Total Results:
-            <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult}>
-          </label>
-          <input type = 'submit' value = 'submit' />
+          // <label>
+          //   Name:
+          <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue}>
+          // </label>
+          // </br>
+          // <label>
+          //   Total Results:
+          <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult}>
+          // </label>
+          <button type = 'submit' value = 'submit'>Search</button>
         </form>
         <ul>{this.renderThreadList()}</ul>
       </div>
