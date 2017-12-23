@@ -58,11 +58,10 @@ class SearchForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    // superagent.get(`http://reddit.com/r/${redditSubmit}.json?limit=${limit}`)
     superagent.get(`https://www.reddit.com/r/${board}.json?limit=${searchFormLimit}`)
     .then((results) => {
       this.setState({finding: results.body.data.children});
-      // this.setState({board:board})
+      this.setState({board:board})
     }).catch(console.log('searching...'));
   }
 
