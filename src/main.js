@@ -10,6 +10,10 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      board: '',
+      posts: []
+    }
   }
 
   render() {
@@ -19,7 +23,7 @@ class App extends React.Component {
           <h1>Reddit Search</h1>
         </header>
         <section>
-          <SeachForm />
+          <SearchForm />
 
         </section>
         <footer>
@@ -35,7 +39,8 @@ class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // redditList = [],
+      board: '',
+      posts: []
     };
   }
 
@@ -53,9 +58,11 @@ class SearchForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    superagent.get(`http://reddit.com/r/${searchFormBoard}.json?limit=${searchFormLimit}`)
+    // superagent.get(`http://reddit.com/r/${redditSubmit}.json?limit=${limit}`)
+    superagent.get(`https://www.reddit.com/r/${board}.json?limit=${searchFormLimit}`)
     .then((results) => {
-      this.setState({finding: results.body.data.children });
+      this.setState({finding: results.body.data.children});
+      // this.setState({board:board})
     }).catch(console.log('searching...'));
   }
 
@@ -68,12 +75,12 @@ class SearchForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className = 'form'>
         <form onSubmit = {this.handleSubmit}>
 
-          <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue} />
+          <input type = 'text' name = 'search' placeholder = 'Enter search' value = {this.state.redditSubmit} onChange = {this.state.redditValue} />
 
-          <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult} />
+          <input type = 'number' name = 'results' min = '0' max = '10' placeholder = '# of results' value = {this.state.redditThread} onChange = {this.state.redditResult} />
 
           <button type = 'submit' value = 'submit'>Search</button>
         </form>
