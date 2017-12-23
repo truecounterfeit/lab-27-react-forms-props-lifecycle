@@ -21,41 +21,63 @@ class App extends React.Component {
     )
   };
 
+}
+
 class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      redditList = [],
-    }
+      // redditList = [],
+    };
+  }
 
-    handleValue(e){
-      this.setState({
-        subReddit: even.target.value
-      });
-    }
+  redditValue(e){
+    this.setState({
+      redditSubmit: even.target.value
+    });
+  }
 
-    handleThread(e){
-      this.setState({
-        redditThread: event.target.value
-      });
-    }
+  redditResult(e){
+    this.setState({
+      redditThread: event.target.value
+    });
+  }
 
-    handleSubmit(e){
+  handleSubmit(e){
+    e.preventDefault();
+    superagent.get(`http://reddit.com/r/${searchFormBoard}.json?limit=${searchFormLimit}`)
+    .then((results) => {
+      this.setState({finding: results.body.data.children });
+    }).catch(console.log('searching...'));
+  }
 
-    }
-
-
-
+  renderThreadList() {
+    if(this.state.finding)
+      return this.state.finding.map(thread => {
+        return <SearchResultList listItem = {thread} />;
+      })
   }
 
   render() {
     return (
       <div>
-        <form>
-          <label>Reddit Search Engine</label>
-          <SearchResultList />
-          <input type: 'submit' value: 'submit'>
+        <form onSubmit = {this.handleSubmit}>
+          <label>
+            <h1>Reddit Search Engine</h1>
+          <label>
+            </br>
+          <label>
+            Name:
+            <input type = 'text' value = {this.state.redditSubmit} onChange = {this.state.redditValue}>
+          </label>
+            </br>
+          <label>
+            Total Results:
+            <input type = 'text' value = {this.state.redditThread} onChange = {this.state.redditResult}>
+          </label>
+          <input type = 'submit' value = 'submit' />
         </form>
+        <ul>{this.renderThreadList()}</ul>
       </div>
     )
   }
@@ -72,7 +94,9 @@ class SearchResultList extends React.Component {
     return (
       <div>
         <ul>
-          <li>
+          <li> <a href = {this.props.listItem.data.url}>
+          <h5> {this.props.listItem.data.title} </h5>
+          <p> {this.props.listItem.data.ups} </p>
         </ul>
       </div>
     )
