@@ -81,7 +81,7 @@ class SearchForm extends React.Component {
 
           <input type = 'number' name = 'results' min = '0' max = '10' placeholder = '# of results' value = {this.state.redditThread} onChange = {this.state.redditResult} />
 
-          <button type = 'submit' value = 'submit'>Search</button>
+          <button type = 'submit' value = 'submit' onClick={this.handleSubmit}>Search</button>
         </form>
         <ul>{this.renderThreadList()}</ul>
       </div>
