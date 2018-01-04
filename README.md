@@ -2,7 +2,7 @@
 
 * npm run start
 
-* type in: localhost:8081
+* type in: localhost:8080
 
 * Enter reddit search in 'Enter search' text input box
 * Enter number of results wanted in '# of results' number input box
