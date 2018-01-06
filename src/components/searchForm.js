@@ -1,4 +1,3 @@
-import './style/main.scss';
 
 import React from 'react';
 import ReactDom from 'react-dom';
@@ -9,14 +8,14 @@ class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      board: '',
+      searchText: '',
       posts: []
     };
   }
 
   redditValue(e){
     this.setState({
-      redditSubmit: even.target.value
+      redditSubmit: event.target.value
     });
   }
 
@@ -24,6 +23,15 @@ class SearchForm extends React.Component {
     this.setState({
       redditThread: event.target.value
     });
+  }
+
+  handleSearch(e){
+    e.preventDefault();
+
+  }
+  handleChange(e){
+    e.preventDefault();
+    // set target
   }
 
   handleSubmit(e){

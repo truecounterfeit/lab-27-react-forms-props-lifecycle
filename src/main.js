@@ -9,13 +9,6 @@ import SearchResultList from './components/searchResultList';
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      board: '',
-      posts: []
-    }
-  }
 
   render() {
     return (
@@ -25,7 +18,6 @@ class App extends React.Component {
         </header>
         <section>
           <SearchForm />
-          <SearchResultList />
         </section>
         <footer>
           <h6>Lab27</h6>
