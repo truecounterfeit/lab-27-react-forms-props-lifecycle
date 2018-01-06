@@ -3,47 +3,58 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import superagent from 'superagent';
 
+import SearchResultList from './searchResultList';
+
 
 class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       searchText: '',
-      posts: []
+      posts: [],
+      searchFormLimit: ''
     };
+
+    this.redditValue = this.redditValue.bind(this);
+    this.redditResult = this.redditResult.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   redditValue(e){
+    e.preventDefault();
     this.setState({
-      redditSubmit: event.target.value
+      redditSubmit: event.target.searchText
     });
   }
 
   redditResult(e){
+    e.preventDefault();
     this.setState({
-      redditThread: event.target.value
+      redditThread: event.target.searchFormLimit
     });
   }
 
-  handleSearch(e){
-    e.preventDefault();
-
-  }
-  handleChange(e){
-    e.preventDefault();
-    // set target
-  }
+  // handleSearch(e){
+  //   e.preventDefault();
+  //   setState:
+  // }
+  //
+  // handleChange(e){
+  //   e.preventDefault();
+  //   setState: event.target.searchText
+  //   // set target
+  // }
 
   handleSubmit(e){
     e.preventDefault();
-    superagent.get(`https://www.reddit.com/r/${board}.json?limit=${searchFormLimit}`)
+    superagent.get(`https://www.reddit.com/r/${this.searchText}.json?limit=${this.searchFormLimit}`)
     .then((results) => {
       this.setState({finding: results.body.data.children});
-      this.setState({board:board})
+      // this.setState({board:board})
     }).catch(console.log('searching...'));
   }
 
-  renderThreadList() {
+  renderList() {
     if(this.state.finding)
       return this.state.finding.map(thread => {
         return <SearchResultList listItem = {thread} />;
@@ -61,7 +72,7 @@ class SearchForm extends React.Component {
 
           <button type = 'submit' value = 'submit' onClick={this.handleSubmit}>Search</button>
         </form>
-        <ul>{this.renderThreadList()}</ul>
+        <ul className = 'list' >{this.renderList()}</ul>
       </div>
     )
   }
