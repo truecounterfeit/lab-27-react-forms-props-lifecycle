@@ -11,90 +11,88 @@ class SearchForm extends React.Component {
     super(props)
     this.state = {
       searchText: '',
-      posts: [],
-      postsError: null,
+      posts: null,
+      // postsError: null,
       searchFormLimit: '',
     };
 
-    this.redditValue = this.redditValue.bind(this);
-    this.redditResult = this.redditResult.bind(this);
+    // this.redditValue = this.redditValue.bind(this);
+    // this.redditResult = this.redditResult.bind(this);
 
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleChange= this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  redditValue(e){
-    e.preventDefault();
-    this.setState({
-      redditSubmit: event.target.searchText
-    });
-  }
+  // redditValue(e){
+  //   e.preventDefault();
+  //   this.setState({
+  //     redditSubmit: event.target.searchText
+  //   });
+  // }
+  //
+  // redditResult(e){
+  //   e.preventDefault();
+  //   this.setState({
+  //     searchFormLimit: e.target.value
+  //   });
+  // }
 
-  redditResult(e){
+  handleChange(e){
     e.preventDefault();
     this.setState({
-      redditThread: event.target.searchFormLimit
-    });
-  }
-
-  handleSearch(e){
-    e.preventDefault();
-    this.setState({
-      posts: req
+      searchText: e.target.value
     })
   }
 
   handleSubmit(e){
     e.preventDefault();
-    superagent.get(`https://www.reddit.com/r/${this.searchText}.json?limit=${this.searchFormLimit}`)
+    superagent.get(`https://www.reddit.com/r/${this.state.searchText}.json?limit=100`)
     // console.log('searching...');
 
-    .then((res) => {
+    .then(res => {
       this.setState({
       posts: res.body.data.children,
-      postsError: null
+      // postsError: null
       });
       console.log('found!');
     })
-
-    .catch(
+    //
+    .catch(err => {
+      // console.error(err);
       this.setState({
-      posts: null,
-      postsError: name
+        searchErrorMessage: `Unable to find Reddit`
       })
-
-    );
-
-    if(!this.state.posts[this.searchText]) {
-      this.setState({
-        posts: null,
-        postsError: name
-      });
-      console.error();
-    };
-
-    }
-
-  renderList() {
-    if(this.state.posts)
-      return this.state.posts.map(found => {
-        return <SearchResultList listItem = {found} />;
-      })
+    });
   }
+
+    // if(!this.state.posts[this.searchText]) {
+    //   this.setState({
+    //     posts: null,
+    //     // postsError: name
+    //   });
+    //   console.error();
+    // };
+
+    // <input type = 'text' name = 'search' placeholder = 'Enter search' value = {this.state.redditSubmit} onChange = {this.state.redditValue} className = 'error'/>
+    //        <input type = 'text' name = 'search' placeholder = 'Enter search' value = {this.state.handleChange} className = 'error'/>
+
+    // <input type = 'number' name = 'results' min = '0' max = '100' placeholder = '# of results' />
+    // <input type = 'number' name = 'results' min = '0' max = '100' placeholder = '# of results' value = {this.state.redditThread} onChange = {this.state.redditResult} />
+
 
   render() {
     return (
       <div className = 'form'>
         <form onSubmit = {this.handleSubmit}>
 
-          <input type = 'text' name = 'search' placeholder = 'Enter search' value = {this.state.redditSubmit} onChange = {this.state.redditValue} className = 'error'/>
+        <input
+        type= 'text'
+        name= 'posts'
+        onChange = {this.handleChange} />
 
-          <input type = 'number' name = 'results' min = '0' max = '100' placeholder = '# of results' value = {this.state.redditThread} onChange = {this.state.redditResult} />
-
-          <button type = 'submit' value = 'submit' onClick={this.handleSubmit}>Search</button>
-
+        <button type = 'submit'> Submit </button>
         </form>
-        <ul className = 'list' >{this.renderList()}</ul>
+
       </div>
     )
   }

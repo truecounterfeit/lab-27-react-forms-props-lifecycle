@@ -5,6 +5,7 @@ import ReactDom from 'react-dom';
 import superagent from 'superagent';
 
 import SearchForm from './components/searchForm';
+import SearchResultList from './components/searchResultList';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
         </header>
         <section>
           <SearchForm />
+          <SearchResultList />
         </section>
         <footer>
           <h6>Lab27</h6>
