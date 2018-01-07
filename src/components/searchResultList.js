@@ -12,8 +12,8 @@ class SearchResultList extends React.Component {
   }
 
   listItem(){
-    {this.props.handleSubmit.map((listItem, i) =>
-        <li key = {searchFormLimit}>
+    {this.props.posts.map((listItem, i) =>
+        <li key = {i}>
         <a href = {this.props.listItem.data.url}>
         <h5> {this.props.listItem.data.title} </h5>
         <p> {this.props.listItem.data.ups} </p>
