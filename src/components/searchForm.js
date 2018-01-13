@@ -45,11 +45,13 @@ class SearchForm extends React.Component {
         <input
         type= 'text'
         name= 'searchText'
+        placeholder = 'Enter search'
         onChange = {this.handleChange} />
 
         <input
         type = 'number'
         name = 'searchFormLimit'
+        placeholder = '# of results'
         onChange = {this.handleChange} />
 
         <button type = 'submit'> Submit </button>
