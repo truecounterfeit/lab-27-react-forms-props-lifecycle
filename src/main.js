@@ -13,31 +13,33 @@ class App extends React.Component {
     super(props)
     this.state = {
       posts: null,
-      // searchFormLimit = ''
+
     }
 
     this.getResults = this.getResults.bind(this);
   }
 
-  getResults(posts){
-    superagent.get(`https://www.reddit.com/r/${this.state.searchText}.json?limit=100`)
-    // console.log('searching...');
+  getResults(searchText, searchFormLimit) {
+
+    superagent.get(`https://www.reddit.com/r/${searchText}.json?limit=${searchFormLimit}`)
+
 
     .then(res => {
+
       this.setState({
       posts: res.body.data.children,
-      // postsError: null
+
       });
       console.log('found!');
     })
-    //
+
     .catch(err => {
-      // console.error(err);
+
       this.setState({
         searchErrorMessage: `Unable to find Reddit`
       })
     });
-  }
+  };
 
   render() {
     return (
@@ -46,7 +48,8 @@ class App extends React.Component {
           <h1>Reddit Search</h1>
         </header>
         <section>
-          <SearchForm />
+          <SearchForm
+          getResults={this.getResults} />
           <SearchResultList posts={this.state.posts} />
         </section>
         <footer>

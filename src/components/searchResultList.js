@@ -8,24 +8,22 @@ class SearchResultList extends React.Component {
   constructor(props) {
     super(props)
 
-    this.listItem = this.listItem.bind(this);
   }
 
-  listItem(){
-    {this.props.posts.map((listItem, i) =>
-        <li key = {i}>
-        <a href = {this.props.listItem.data.url}>
-        <h5> {this.props.listItem.data.title} </h5>
-        <p> {this.props.listItem.data.ups} </p>
-        </a>
-        </li>
-      )}
-    }
-
   render() {
+    console.log(this.props.posts);
     return (
       <div className = 'list'>
-        <ul>{this.listItem}</ul>
+        <ul>
+          { this.props.posts ? this.props.posts.map((listItem, i) =>
+              <li key = {i}>
+              <a href = {listItem.data.url}>
+              <h5> {listItem.data.title} </h5>
+              <p> {listItem.data.ups} </p>
+              </a>
+              </li>
+            ): null}
+        </ul>
       </div>
     )
   }

@@ -11,8 +11,6 @@ class SearchForm extends React.Component {
     super(props)
     this.state = {
       searchText: '',
-      posts: null,
-      // postsError: null,
       searchFormLimit: '',
     };
 
@@ -23,26 +21,35 @@ class SearchForm extends React.Component {
 
   handleChange(e){
     e.preventDefault();
+
+
     this.setState({
-      searchText: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
   handleSubmit(e){
     e.preventDefault();
-    let posts = this.state.posts;
-    this.props.getResults(posts);
+    let searchFormLimit = this.state.searchFormLimit;
+    let searchText = this.state.searchText;
+    this.props.getResults(searchText, searchFormLimit);
   }
 
 
   render() {
+
     return (
       <div className = 'form'>
         <form onSubmit = {this.handleSubmit}>
 
         <input
         type= 'text'
-        name= 'posts'
+        name= 'searchText'
+        onChange = {this.handleChange} />
+
+        <input
+        type = 'number'
+        name = 'searchFormLimit'
         onChange = {this.handleChange} />
 
         <button type = 'submit'> Submit </button>
