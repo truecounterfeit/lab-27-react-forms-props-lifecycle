@@ -9,7 +9,7 @@ button {
   background: #000000;
   color: white;
   height: 10%;
-  width: 10%;
+  width: inherit;
   text-align: center;
   line-height: inherit;
   border: 2px white solid;
@@ -21,7 +21,17 @@ button {
    font-size: 1em;
  }
 
- form {
+form {
    max-height: inherit;
    margin: 2%;
+   color: black;
  }
+
+.list {
+  color: white;
+
+}
+
+.error {
+  border: 2px red
+}
